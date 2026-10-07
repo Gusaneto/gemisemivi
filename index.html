@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="SEMOVI">
+    <title> SEMOVI · Generador y Validador de Documentos </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+<header>
+    <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 shadow-sm">
+        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+            <img src="https://app.semovi.cdmx.gob.mx/validacion-qr/images/logo-cdmx-semovi.png" alt="SEMOVI" class="h-10" />
+        </div>
+    </nav>
+</header>
+<hr class="w-full h-1 mx-auto border-0 rounded my-0" style="background-color: #9d2148">
+
+<div class="max-w-2xl mx-auto w-full p-6 my-8 bg-white rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold text-gray-700 mb-6 text-center">Generador de Enlaces de Validación SEMOVI</h2>
+    
+    <form id="generatorForm" class="space-y-4">
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Folio de Documento:</label>
+            <input type="text" id="folio" required value="N16542850" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Tipo / Subtipo de Documento:</label>
+            <input type="text" id="tipo" required value="LICENCIAS / TIPO: A" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Fecha de Expedición:</label>
+            <input type="text" id="expedicion" required value="17/11/2025" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Token / URL Personalizada (Identificador único):</label>
+            <input type="text" id="token" required value="" placeholder="Ej. token123 o deja en blanco para generar aleatorio" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+        <button type="submit" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#9d2148] hover:bg-[#801b3a] focus:outline-none">
+            Generar Enlace de Validación
+        </button>
+    </form>
+
+    <div id="resultContainer" class="mt-6 hidden p-4 bg-gray-50 rounded-md border border-gray-200">
+        <h3 class="text-lg font-medium text-gray-800 mb-2">¡Enlace Generado con Éxito!</h3>
+        <p class="text-sm text-gray-600 mb-2">Comparte o accede a la siguiente URL:</p>
+        <div class="flex items-center space-x-2">
+            <input type="text" id="generatedUrl" readonly class="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm text-gray-700">
+            <button id="copyBtn" class="px-3 py-2 bg-gray-200 hover:bg-gray-300 rounded-md text-sm font-medium text-gray-700">Copiar</button>
+        </div>
+        <div class="mt-4">
+            <a id="previewLink" href="#" target="_blank" class="text-indigo-600 hover:underline text-sm font-medium">Abrir página generada →</a>
+        </div>
+    </div>
+</div>
+
+<footer class="text-white mt-auto" style="background-color: #9d2148;">
+    <div class="w-full max-w-screen-xl mx-auto p-4 md:py-6 text-center text-sm">
+        Dirección: Avenida Álvaro Obregón 269, Colonia Roma Norte, C.P. 06700, Ciudad de México
+    </div>
+</footer>
+
+<script>
+    // Autogenerate random token if empty on load
+    document.getElementById('token').value = Math.random().toString(36.substring(2, 10)) + Math.random().toString(36).substring(2, 6);
+
+    document.getElementById('generatorForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const folio = document.getElementById('folio').value;
+        const tipo = document.getElementById('tipo').value;
+        const expedicion = document.getElementById('expedicion').value;
+        let token = document.getElementById('token').value.trim();
+        if(!token) {
+            token = Math.random().toString(36).substring(2, 10);
+        }
+
+        const data = { folio, tipo, expedicion };
+        
+        // Save parameters to localStorage so the target document page can read it dynamically
+        localStorage.setItem('semovi_' + token, JSON.stringify(data));
+
+        const baseUrl = window.location.origin + window.location.pathname.replace(/index\.html$/, '');
+        const finalUrl = baseUrl + 'view.html?token=' + encodeURIComponent(token);
+
+        document.getElementById('generatedUrl').value = finalUrl;
+        document.getElementById('previewLink.href') = finalUrl;
+        document.getElementById('previewLink').href = finalUrl;
+        document.getElementById('resultContainer').classList.remove('hidden');
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', function() {
+        const copyText = document.getElementById('generatedUrl');
+        copyText.select();
+        document.execCommand('copy');
+        alert('¡Enlace copiado al portapapeles!');
+    });
+</script>
+</body>
+</html>

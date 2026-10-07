@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="SEMOVI">
+    <title> SEMOVI · Validación de Licencia y Tarjetas de Circulación </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+</head>
+<body>
+<header>
+    <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
+        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+            <img src="https://app.semovi.cdmx.gob.mx/validacion-qr/images/logo-cdmx-semovi.png" alt="SEMOVI" />
+        </div>
+    </nav>
+</header>
+<hr class="w-full h-1 mx-auto border-0 rounded my-2 md:my-2" style="background-color: #9d2148">
+
+<div class="mx-auto w-full m-5 pb-10">
+    <div class="w-full md:w-full flex justify-center">
+        <div class="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50" role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <div>
+                <span class="text-2xl md:text-2xl">Para confirmar que estás en el sitio oficial de la SEMOVI, verifica que la URL sea: <strong>https://app.semovi.cdmx.gob.mx/</strong>.</span>
+            </div>
+        </div>
+    </div>
+    <div class="w-full md:w-full flex justify-center p-10">
+        <h2 class="text-2xl md:text-2xl text-gray-500">Validación de Tarjetas de Circulación y Licencias de Conducir</h2>
+    </div>
+    <div class="flex justify-center w-full md:w-full">
+        <div class="w-full md:w-full flex justify-center">
+            <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+                <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <div>
+                    <span class="text-2xl md:text-2xl">Su documento es válido.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="max-w-5xl mx-auto md:shadow rounded-lg bg-gray-50 border border-gray-300">
+        <div class="md:flex">
+            <div class="md:h-full md:w-1/2">
+                <img class="h-48 w-full object-cover md:h-full md:w-full rounded-lg" src="https://app.semovi.cdmx.gob.mx/validacion-qr/images/independencia.png" onerror="this.onerror=null; this.src='https://app.semovi.cdmx.gob.mx/validacion-qr/images/welcome.svg'" alt="SEMOVI" width="100" height="120">
+            </div>
+            <div class="w-full md:full">
+                <div class="w-full md:w-full flex justify-center p-10">
+                    <h2 class="text-2xl md:text-2xl text-gray-500">Datos del documento</h2>
+                </div>
+                <div class="p-1">
+                    <ul>
+                        <li><strong>Fecha de expedición: </strong><span id="val_expedicion">17/11/2025</span></li>
+                        <li><strong>Tipo / Subtipo de Documento: </strong><span id="val_tipo">LICENCIAS / TIPO: A</span></li>
+                        <li><strong>Fecha de Validación: </strong><span id="val_validacion">07-10-2026 20:07</span></li>
+                        <li><strong>Folio de Documento: </strong><span id="val_folio">N16542850</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="text-white" style="background-color: #9d2148;">
+    <div class="w-full max-w-screen-xl mx-auto p-4 md:py-6">
+        <div class="sm:flex sm:items-center sm:justify-between">
+            <div>
+                <a href="https://www.semovi.cdmx.gob.mx/" class="flex items-center mb-4 sm:mb-0">
+                    <img src="https://app.semovi.cdmx.gob.mx/validacion-qr/images/dependencia2.png" width="100%" alt="SEMOVI">
+                </a>
+            </div>
+            <div>
+                <a class="bg-cobre-gob text-white font-bold py-1 px-2 rounded-full" href="https://www.cdmx.gob.mx/" target="_blank"><span>CDMX</span></a> |
+                <a class="bg-cobre-gob text-white font-bold py-1 px-2 rounded-full" href="https://www.semovi.cdmx.gob.mx/" target="_blank"><span>SEMOVI</span></a>
+            </div>
+        </div>
+        <hr class="my-2 border-gray-200 sm:mx-autolg" />
+        <span class="block text-sm sm:text-center">
+            Dirección: Avenida Álvaro Obregón 269 Colonia Roma Norte, Alcaldía Cuauhtémoc C.P. 06700, Ciudad de México
+        </span>
+        <span class="block text-sm sm:text-center">2023.</span>
+    </div>
+</footer>
+
+<script>
+    // Generate dynamic current validation date/time
+    const now = new Date();
+    const pad = n => n.toString().padStart(2, '0');
+    const formattedDate = `${pad(now.getDate())}-${pad(now.getMonth()+1)}-${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+    document.getElementById('val_validacion').innerText = formattedDate;
+
+    // Parse query parameters and token
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    const folioParam = urlParams.get('folio');
+    const tipoParam = urlParams.get('tipo');
+    const expedicionParam = urlParams.get('expedicion');
+
+    if (folioParam) {
+        document.getElementById('val_folio').innerText = folioParam;
+    }
+    if (tipoParam) {
+        document.getElementById('val_tipo').innerText = tipoParam;
+    }
+    if (expedicionParam) {
+        document.getElementById('val_expedicion').innerText = expedicionParam;
+    }
+
+    if (token) {
+        // Try to load from localStorage saved by generator
+        const savedData = localStorage.getItem('semovi_' + token);
+        if (savedData) {
+            try {
+                const data = JSON.parse(savedData);
+                if(data.folio) document.getElementById('val_folio').innerText = data.folio;
+                if(data.tipo) document.getElementById('val_tipo').innerText = data.tipo;
+                if(data.expedicion) document.getElementById('val_expedicion').innerText = data.expedicion;
+            } catch(e) {}
+        }
+    }
+</script>
+</body>
+</html>
